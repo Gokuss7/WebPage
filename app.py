@@ -1,16 +1,17 @@
 from flask import Flask
-from flask import render_template
-from flask import request
 from flask import render_template, request, redirect, url_for
+from form import Form
+from config import Config
 
 app = Flask(__name__)
+app.config.from_object(Config)
 
-@app.route('/')
+@app.route("/")
 def index():
     page = request.args.get('page', 1)
     list = request.args.get('list', 20)
-
-    return render_template("index.html")
+    return "Index"
+    ...
 
 @app.route("/signup/", methods=["GET", "POST"])
 def show_signup_form():
@@ -22,12 +23,11 @@ def show_signup_form():
         if next:
             return redirect(next)
         return redirect(url_for('index'))
-    return render_template("signup_form.html")
+    return render_template("signup_form.html", form=Form())
 
-posts = [3,4,5]
-
+posts = [1, 2, 3]
 @app.route("/posts")
-def count_posts():
+def indexPosts():
     return "{} posts".format(len(posts))
 
 @app.route("/p/<string:slug>/")
@@ -41,3 +41,4 @@ def post_form(post_id=None):
 
 if __name__ == '__main__':
     app.run()
+

@@ -1,5 +1,3 @@
-#Crear archivo config.py con:
-
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -27,3 +25,4 @@ class DevelopmentConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+
